@@ -38,8 +38,6 @@
                           É semelhante ao innerText do javascript -->
   <!-- Diretiva "v-once": Faz com que elementos html sejam "renderizados" apenas uma única vêz. -->
   <!-- Diretiva "v-for":  Implementa laços de repetiçao (loop) -->
-  <!-- Atributo "Key": Fornece uma identidade para um trecho da tag(código) html 
-                       Informa ao vue todos os elementos filhos que devem ser modificados, cfe.o binding -->
 
  
 
@@ -76,21 +74,12 @@
             <td>{{descricao}}</td>
           </tr>
         </tbody>
-      </table>    
-      <hr>
-      <ul>
-        <li v-for="p in publicacoes" style="border: solid 1px; margin-bottom: 10px" :key="p.id">  <!-- key:identificador único para toda a tag "li" -->
-          {{ p.publicacao }}
-          <hr>
-          <input type="text">
-        </li>
-      </ul> 
-      <button @click="misturarArray()">Misturar publicações</button>                  
+      </table>                             
   </div>
 
 
   <script>
-    const vm = new Vue({ //Instância do vue. Objeto literal Vue
+    const vm = new Vue({ //Objeto literal Vue
       el: '#app',
       data: {   //Variáveis reativas
 				cursos: ['Laravel', 'Web Completo', 'Banco de Dados', 'Solid', 'Angular'],  //array
@@ -103,23 +92,10 @@
             titulo: 'Banco de Dados',   //atributo1
             descricao: 'Aprenda os principais BDs relacionais do mercado'   //atributo2
           }
-        },
-        publicacoes: [  //Array de objetos
-          {id: 1, publicacao: 'Publicação 11'},   //cada objeto será uma publicação
-          {id: 2, publicacao: 'Publicação 12'},   //cada objeto será uma publicação
-          {id: 3, publicacao: 'Publicação 13'}    //cada objeto será uma publicação
-        ]
+        }
       },
       methods: {
-       misturarArray() {
-         let misturado = [] //Somente criando o array
-
-         misturado[0] = this.publicacoes[2]
-         misturado[1] = this.publicacoes[0]
-         misturado[2] = this.publicacoes[1]
-
-         this.publicacoes = misturado
-       }
+       
       }
     })
   </script>

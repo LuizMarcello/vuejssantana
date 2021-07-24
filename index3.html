@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+      {{ somar() }} <br>
+      {{ subtrair() }} <br>
+      {{ multiplicar() }} <br>
+      {{ dividir() }} <br>
+      
+  </div>
+
+  <script>
+    /* methods: Atributo reservado do Vue: Quais os metódos mapeados para 
+         o template(elemento html selecionado pela instância do vue)  */
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        n1: 10,
+        n2: 5
+      },
+      methods: { //Recebe um objeto literal
+        somar: function somar() {  //Notação com síntax convencional para funções no javascript
+          return this.n1 + this.n2;  //operador "this": Para ter acesso as propriedades do atributo "data", faz referência a instância do objeto vue
+        },
+        subtrair: function() {  //Notação com síntax função anônima
+          return this.n1 - this.n2;
+        },
+        multiplicar: () => {  //Notação com síntax arrow function
+          return 4 * 2;       //Aqui this não dá certo, devido ao contexto léxico
+            
+        },
+        dividir() {
+          return this.n1 / this.n2;  //Notação com síntax mais enxuta para definir os pares de chave/valor.
+        }
+       
+      }
+    })
+  </script>
+
+</body>
+
+</html>

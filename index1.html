@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+</head>
+
+<body>
+
+  <!-- Esta div com o id "app" será o elemento html inicial da aplicação -->
+  <div id="app">
+    <!-- {{ }}: double mustache, faz os "binding" do elemento html mapeado pela instância do Vue -->
+    Mensagem: {{ mensagem }} <br>
+    Valor total: R$ {{ valorTotal }} <br>
+    Logado: {{ logado }} <br>
+    Hobbie: {{ hobbies[2] }} <br>
+    Perfil: {{ perfil.site }}, {{ perfil.cursos[0].nome }}, {{ perfil.cursos[1].cargaHoraria }}
+  </div>
+
+  <script>
+    /* el: Atributo reservado do Vue: qual elemento html o vue deve selecionar */
+    /* Uma Instância do vue para manipular um elemento html */
+    /* Variável "vm", só para recuperar a instância do Vue: */
+    /* vm = ViewModel */
+    const vm = new Vue({
+      el: '#app',  /* #(sharp) para selecionar por id | . para selecionar por class */
+      data: {
+        /* Este atributo reservado(propriedade) do Vue "data": espera um objeto com parâmetros: as variáveis
+           que estarão disponíveis no contexto da div selecionada. Variáveis/atributos "reativos" */
+        mensagem: 'Primeiro template controlado pelo Vue', //propriedade string
+        valorTotal: 150.47, //propriedade númerica
+        logado: false, //propriedade booleana
+        hobbies: [ //propriedade com array
+          'Dormir',
+          'Colecionar video games antigos',
+          'Correr',
+          'Trilhas'
+        ],
+        perfil: { //propriedade com objetos
+          nome: 'Jorge Sant Ana',
+          site: 'joprgesantana.net.br',
+          idade: 32,
+          cursos: [
+            {
+              nome: 'Laravel',
+              cargaHoraria: '50 horas'
+            },
+            {
+              nome: 'Banco de dados Relacionais',
+              cargaHoraria: '40 horas'
+            }
+          ]
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

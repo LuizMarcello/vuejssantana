@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+  
+  <style>
+    .verde {
+      color:green
+    }
+
+    .negrito {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Diretiva v-bind: Realizando o bind em atributos de tags HTML -->
+  <div id="app">  <!-- Maneira mais enxuta de usar a diretiva v-bind nos atributos das tags html(síntaxe sugar). Só os dois pontos -->
+     <a :href="site" href="www.google.com.br">site</a>   <!-- Na sobreposição de um mesmo valor de atributo, prevalece o da "direita" -->
+     <p  class="negrito" :class="cor">Entendendo a diretiva v-bind</p>  <!-- encadeamento de valores (atributo class). O atributo inserido
+                                                                             diretamente na tag html deve vir a "esquerda" daquele da diretiva v-bind -->
+     <input type="text" :placeholder="instrucaoDePreenchimento" :value="valor">
+     <input type="checkbox" :checked="check"> 
+  </div>
+
+  <script>
+    /* methods: Atributo reservado do Vue: Quais os metódos mapeados para 
+         o template(elemento html selecionado pela instância do vue)  */
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        site: 'https://jorgesantana.net.br',
+        cor: 'verde',
+        instrucaoDePreenchimento: 'Placeholder - Diretiva v-bind',
+        valor: 'Entendendo a diretiva v-bind',
+        check: true
+      },
+      methods: {}
+    })
+
+  </script>
+
+</body>
+
+</html>

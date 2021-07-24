@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+  
+  <style>
+    .verde {
+      background-color:green
+    }
+
+    .negrito {
+      font-weight: bold;
+    }
+
+    .azul {
+      background-color:  blue;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div id="app">  
+      {{ ( 2 + 2 ) / 2 }} <br>
+      {{ mensagem.length }} <br>
+      {{ mensagem.substr(0,3) }} <br>
+      <input :value="2 + 2" :class="teste ? 'verde' : estilo">
+  </div>
+
+  <script>
+    
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        mensagem: 'Expressão',
+        estilo: 'azul',
+        teste: false
+      },
+      methods: {}
+    })
+
+  </script>
+
+</body>
+
+</html>

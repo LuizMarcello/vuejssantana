@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+
+  <style>
+    
+  </style>
+</head>
+
+<!-- Os modificadores são atalhos para determinadas ações corriqueiras nos sistemas -->
+
+<body>
+  <!-- Diretiva "v-On": Binding para manipulação de eventos  -->
+  <!-- Síntaxe enxuta: "@" -->
+  <!-- Diretiva v-bind: Realizando o bind em atributos de tags HTML -->
+  <!-- Síntaxe enxuta: ":" -->
+  <!-- Diretiva "v-if": "Renderização" condicional de elementos html. Valor atribuído pode ser uma expressão  -->
+  <!-- Síntaxe enxuta: " " -->
+	<!-- Diretiva "v-show": "Exibição" condicional de elementos html. Valor atribuído pode ser uma expressão
+													 Será renderizado(fará parte do DOM), mas poderá ou não ser visível. Controla a 
+													 propriedade display do elemento html -->
+  <!-- Síntaxe enxuta: " " -->
+  <!-- Diretiva "v-html": Permite a injeção de elementos html dentro de outros elementos html
+                          É semelhante ao innerHTML do javascript -->
+  <!-- Diretiva "v-text": Permite incluir conteúdo dentro de tags html, em formato de texto.
+                          É semelhante ao innerText do javascript -->
+
+
+  <div id="app">
+			<div v-html="elementosHTML">   <!-- Esta "div" é o elemento que vai receber o conteúdo html injetado. -->
+        <b>Texto de Exemplo1</b>     <!-- Se já ouver anteriormente algum conteúdo normal nesta div, ele será -->
+      </div>                         <!-- completamente substituído pela diretiva v-html -->
+       <div v-text="elementosHTML"></div>    <!-- Se já ouver anteriormente algum conteúdo normal nesta div, ele será -->
+      </div>                                 <!-- completamente substituído pela diretiva v-text -->
+  </div>
+
+
+  <script>
+    const vm = new Vue({ //Objeto literal
+      el: '#app',
+      data: {   //Variáveis reativas
+				elementosHTML: '<p><b>Site</b></p><a href="https://jorgesantana.net.br">Jorge Sant Ana</a>'
+      },
+      methods: {
+       
+      }
+    })
+  </script>
+
+</body>
+
+</html>

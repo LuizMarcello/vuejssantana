@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+
+  <style>
+    .verde {
+      background-color: green
+    }
+
+    .branco {
+      background-color: white
+    }
+
+    .negrito {
+      font-weight: bold;
+    }
+
+    .azul {
+      background-color: blue;
+    }
+
+    .vermelho {
+      background-color: red;
+    }
+
+    .borda {
+      border: 1px solid;
+    }
+
+    .div-principal {
+      width: 200px;
+      height: 200px;
+    }
+
+    .div-comum {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      /* Todas as div´s na mesma linha */
+    }
+  </style>
+</head>
+
+
+<body>
+  <!-- Diretiva "V-On": Binding para manipulação de eventos  -->
+  <!-- Síntaxe enxuta: "@" -->
+  <!-- Diretiva v-bind: Realizando o bind em atributos de tags HTML -->
+  <!-- Síntaxe enxuta: ":" -->
+  <div id="app">
+
+      <div class="borda div-principal" :class="cor">
+        Cor: {{ cor }}
+        <br>
+        Posição X do mouse: {{ posicaoX }} <br>
+        Posição Y do mouse: {{ posicaoY }}
+      </div>
+
+      <hr>
+
+      <div
+          @click="mudarCor('verde')"
+          class="borda div-comum">
+      </div>
+
+      <div 
+          class="borda div-comum"
+          @mouseover="mudarCor('azul')"
+          @mouseout="mudarCor('vermelho')">
+      </div>
+
+      <div  
+          class="borda div-comum"
+          @mousemove="coordenadas($event)">  <!-- $event: captura o objeto com os detalhes deste evento dentro deste método -->
+      </div>
+
+  </div>
+
+  <script>
+    const vm = new Vue({   //Objeto literal
+      el: '#app',
+      data: {
+        cor: 'branco',
+        posicaoX: 0,
+        posicaoY: 0
+      },
+      methods: {
+        mudarCor(c) {
+          this.cor = c
+        },
+        coordenadas(e) {
+          this.posicaoX = e.clientX
+          this.posicaoY = e.clientY
+          console.log(e.clientX, e.clientY)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

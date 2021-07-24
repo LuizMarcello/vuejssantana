@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+
+  <style>
+    .verde {
+      background-color: green
+    }
+
+    .branco {
+      background-color: white
+    }
+
+    .negrito {
+      font-weight: bold;
+    }
+
+    .azul {
+      background-color: blue;
+    }
+
+    .vermelho {
+      background-color: red;
+    }
+
+    .borda {
+      border: 1px solid;
+    }
+
+    .div-principal {
+      width: 200px;
+      height: 200px;
+    }
+
+    .div-comum {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      /* Todas as div´s na mesma linha */
+    }
+  </style>
+</head>
+
+<!-- Os modificadores são atalhos para determinadas ações corriqueiras nos sistemas -->
+
+<body>
+  <!-- Diretiva "V-On": Binding para manipulação de eventos  -->
+  <!-- Síntaxe enxuta: "@" -->
+  <!-- Diretiva v-bind: Realizando o bind em atributos de tags HTML -->
+  <!-- Síntaxe enxuta: ":" -->
+
+
+  <div id="app">
+    <input type="text" id="inputTexto">
+    <br>
+    <select name="" id="opcoes">
+      <option value="A">Opção 1</option>
+      <option value="B">Opção 2</option>
+      <option value="C">Opção 3</option>
+    </select>
+    <br>
+    <p id="paragrafo" style="color: red;">Parágrafo</p>
+    <div id="bloco">Conteúdo interno da div</div>
+    <br>
+    <button @click="selecionarElementoFilho()">Botão</button>
+  </div>
+
+
+  <script>
+    const vm = new Vue({ //Objeto literal
+      el: '#app',
+      data: {
+
+      },
+      methods: {
+        selecionarElementoFilho() {
+          /* console.log(inputTexto.type) */
+          /* console.log(inputTexto.value) */
+          /* console.log(opcoes.value) */
+          /* console.log(paragrafo.style.color) */
+          console.log(bloco.innerHTML)  //innerHTML: um conteúdo interno do elemento html, no caso, o texto.
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

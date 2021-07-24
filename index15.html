@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+
+  <style>
+    .verde {
+      background-color: green
+    }
+
+    .branco {
+      background-color: white
+    }
+
+    .negrito {
+      font-weight: bold;
+    }
+
+    .azul {
+      background-color: blue;
+    }
+
+    .vermelho {
+      background-color: red;
+    }
+
+    .borda {
+      border: 1px solid;
+    }
+
+    .div-principal {
+      width: 200px;
+      height: 200px;
+    }
+
+    .div-comum {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      /* Todas as div´s na mesma linha */
+    }
+  </style>
+</head>
+
+<!-- Os modificadores são atalhos para determinadas ações corriqueiras nos sistemas -->
+
+<body>
+  <!-- Diretiva "V-On": Binding para manipulação de eventos  -->
+  <!-- Síntaxe enxuta: "@" -->
+  <!-- Diretiva V-bind: Realizando o bind em atributos de tags HTML -->
+  <!-- Síntaxe enxuta: ":" -->
+  <!-- Diretiva "V-If": Renderização condicional de elementos html. Valor atribuído pode ser uma expressão  -->
+  <!-- Síntaxe enxuta: " " -->
+
+
+  <div id="app">
+    <!-- V-If simples -->
+    <button @click="exibirSaldo = !exibirSaldo">
+      <span v-if=!exibirSaldo>Exibir Saldo</span>
+      <span v-if=exibirSaldo>Ocultar Saldo</span>
+    </button> <!-- toggle -->
+    <p>Saldo <span v-if="exibirSaldo">R$ {{ saldo }}</span></p>
+    <hr>
+    <!-- v-if e v-else -->
+    Idade: <input type="text" id="inputIdade" @blur="setIdade()">
+    <p v-if="idade < 18">Menor de idade</p>
+    <p v-else>Maior de idade</p>
+    <hr>
+    <!-- v-if, v-else-if, e v-else -->
+    Nota: <input type="text" id="inputNota" @blur="setNota()">
+    <p v-if="nota == ''">Digite a nota do aluno</p>
+    <p v-else-if="nota >= 7 && nota <= 10">Aluno aprovado</p>
+    <p v-else-if="nota >= 6 && nota < 7">Aluno em recuperação</p>
+    <p v-else-if="nota >= 0 && nota < 5">Aluno reprovado</p>
+    <p v-else>A nota informada é inválida</p>
+  </div>
+
+
+  <script>
+    const vm = new Vue({ //Objeto literal
+      el: '#app',
+      data: {
+        saldo: 4570.17,
+        exibirSaldo: true,
+        idade: 0,
+        nota: 0
+      },
+      methods: {
+        setIdade(){
+          this.idade = inputIdade.value
+        },
+        setNota(){
+          this.nota = inputNota.value
+          console.log(this.nota)
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

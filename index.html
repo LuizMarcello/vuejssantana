@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+  <!-- O vue.js já está no projeto -->
+  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+  <script src="./vue.js"></script>
+  <!-- ou -->
+  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+  <title>Document</title>
+
+  <style>
+    
+  </style>
+</head>
+
+<!-- Os modificadores são atalhos para determinadas ações corriqueiras nos sistemas -->
+
+<body>
+  <!-- Diretiva "v-On": Binding para manipulação de eventos  -->
+  <!-- Síntaxe enxuta: "@" -->
+  <!-- Diretiva v-bind: Realizando o bind em atributos de tags HTML -->
+  <!-- Síntaxe enxuta: ":" -->
+  <!-- Diretiva "v-if": "Renderização" condicional de elementos html. Valor atribuído pode ser uma expressão  -->
+  <!-- Síntaxe enxuta: " " -->
+	<!-- Diretiva "v-show": "Exibição" condicional de elementos html. Valor atribuído pode ser uma expressão
+													 Será renderizado(fará parte do DOM), mas poderá ou não ser visível. Controla a 
+													 propriedade display do elemento html -->
+  <!-- Síntaxe enxuta: " " -->
+  <!-- Diretiva "v-html": Permite a injeção de elementos html dentro de outros elementos html
+                          É semelhante ao innerHTML do javascript -->
+  <!-- Diretiva "v-text": Permite incluir conteúdo dentro de tags html, em formato de texto.
+                          É semelhante ao innerText do javascript -->
+  <!-- Diretiva "v-once": Faz com que elementos html sejam "renderizados" apenas uma única vêz. -->
+  <!-- Diretiva "v-for":  Implementa laços de repetiçao (loop) -->
+
+ 
+
+  <div id="app">
+			<ul>
+        <!-- <li v-for="curso in cursos">{{ curso }}</li> -->
+        <!-- ou -->
+        <!-- <li v-for="curso in cursos" v-text="curso"></li> --> <!-- As variáveis do v-for, no caso, a variável "curso",
+                                                                       está disponível no contexto(escopo) da tag html, podem ser                                                                                                
+                                                                       usadas pelas propriedades ou diretivas da tag -->
+            <!-- <li v-for="(curso, chave) in cursos">{{chave}} - {{curso}}</li> -->  <!-- A segunda variável "chave" corresponde ao
+                                                                                           respectivo índice de cada posição do array -->    
+            <li v-for="(curso, chave) in cursos" v-text="chave +'-'+ curso"></li>
+      </ul>     
+      <hr>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <tr v-for="(curso, chave) in cursos2">
+            <td>{{chave}}</td>
+            <td>{{curso.titulo}}</td>
+            <td>{{curso.descricao}}</td>
+          </tr> -->
+          <!-- ou assim(desistruturando o objeto, recuperando apenas os atributos) -->
+          <tr v-for="({titulo, descricao}, chave) in cursos2">  <!-- destructuring assignment -->
+            <td>{{chave}}</td>
+            <td>{{titulo}}</td>
+            <td>{{descricao}}</td>
+          </tr>
+        </tbody>
+      </table>                             
+  </div>
+
+
+  <script>
+    const vm = new Vue({ //Objeto literal Vue
+      el: '#app',
+      data: {   //Variáveis reativas
+				cursos: ['Laravel', 'Web Completo', 'Banco de Dados', 'Solid', 'Angular'],  //array
+        cursos2: {  //Objeto literal
+          1000: {  //Objeto literal
+            titulo: 'Laravel',  //atributo1
+            descricao: 'Domine o framework PHP mais poderoso do mundo'   //atributo2
+          },
+          1001: {  //Objeto literal
+            titulo: 'Banco de Dados',   //atributo1
+            descricao: 'Aprenda os principais BDs relacionais do mercado'   //atributo2
+          }
+        }
+      },
+      methods: {
+       
+      }
+    })
+  </script>
+
+</body>
+
+</html>

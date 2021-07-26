@@ -15,7 +15,7 @@
   <title>Document</title>
 
   <style>
-    
+
   </style>
 </head>
 
@@ -28,7 +28,7 @@
   <!-- Síntaxe enxuta: ":" -->
   <!-- Diretiva "v-if": "Renderização" condicional de elementos html. Valor atribuído pode ser uma expressão  -->
   <!-- Síntaxe enxuta: " " -->
-	<!-- Diretiva "v-show": "Exibição" condicional de elementos html. Valor atribuído pode ser uma expressão
+  <!-- Diretiva "v-show": "Exibição" condicional de elementos html. Valor atribuído pode ser uma expressão
 													 Será renderizado(fará parte do DOM), mas poderá ou não ser visível. Controla a 
 													 propriedade display do elemento html -->
   <!-- Síntaxe enxuta: " " -->
@@ -40,125 +40,73 @@
   <!-- Diretiva "v-for":  Implementa laços de repetiçao (loop) -->
   <!-- Atributo "Key": Fornece uma identidade para um trecho da tag(código) html 
                        Informa ao vue todos os elementos filhos que devem ser modificados, cfe.o binding -->
-
- 
-
-  <div id="app">
-    <ul>
-      <li v-for="c in comentarios">{{ c.id }} - {{ c.comentario }}</li>
-    </ul>
-    <button @click="adicionarElemento()">Adicionar elemento</button>
-    <button @click="removerElemento()">Remover elemento</button>
-    <button @click="modificarElemento()">Atualizar elemento</button>
+  <!-- tag "template" do html5: Muito utilizada para renderizações condicionais e
+       para geração de listas. Sua característica particular, ela não é renderizada
+       quando a página é carregada no browser(não estará no DOM). Mas ela pode ser
+       referenciada e tratada durante a execução do código javascript. -->
+  <!-- Propriedade computed(computada)(métodos): É definida no objeto literal e encaminhada como parâmetro 
+                                                 na instância do vue. São métodos que retornam valores formados 
+                                                 dinamicamente. Ajuda a evitar lógicas complexas nos "double
+                                                 mustaches" do template -->
+  <div id="app">  <!-- Nosso template -->                            
+    <h4>Adicionar pacientes</h4>
+    <span>Nome: </span><input type="text" id="inputNome"><br>
+    <span>Idade: </span><input type="text" id="inputIdade"><br>
+    <span>Plano: </span><input type="text" id="inputPlano"><br>
+    <button @click="adicionarPaciente()">Adicionar</button>
     <hr>
-    <ul>
-      <li v-for="n in numero">{{ n }}</li>
-    </ul>
-			<ul>
-        <!-- <li v-for="curso in cursos">{{ curso }}</li> -->
-        <!-- ou -->
-        <!-- <li v-for="curso in cursos" v-text="curso"></li> --> <!-- As variáveis do v-for, no caso, a variável "curso",
-                                                                       está disponível no contexto(escopo) da tag html, podem ser                                                                                                
-                                                                       usadas pelas propriedades ou diretivas da tag -->
-            <!-- <li v-for="(curso, chave) in cursos">{{chave}} - {{curso}}</li> -->  <!-- A segunda variável "chave" corresponde ao
-                                                                                           respectivo índice de cada posição do array -->    
-            <li v-for="(curso, chave) in cursos" v-text="chave +'-'+ curso"></li>
-      </ul>     
-      <hr>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Título</th>
-            <th>Descrição</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr v-for="(curso, chave) in cursos2">
-            <td>{{chave}}</td>
-            <td>{{curso.titulo}}</td>
-            <td>{{curso.descricao}}</td>
-          </tr> -->
-          <!-- ou assim(desistruturando o objeto, recuperando apenas os atributos) -->
-          <tr v-for="({titulo, descricao}, chave) in cursos2">  <!-- destructuring assignment -->
-            <td>{{chave}}</td>
-            <td>{{titulo}}</td>
-            <td>{{descricao}}</td>
-          </tr>
-        </tbody>
-      </table>    
-      <hr>
-      <ul>
-        <li v-for="p in publicacoes" style="border: solid 1px; margin-bottom: 10px" :key="p.id">  <!-- key:identificador único para toda a tag "li" -->
-          {{ p.publicacao }}
-          <hr>
-          <input type="text">
-        </li>
-      </ul> 
-      <button @click="misturarArray()">Misturar publicações</button>                  
-  </div>
+    <h4>Último paciente cadastrado</h4>
+    <p v-if="pacientes.length > 0">  <!-- Só vai executar se o array não estiver vazio -->
+      <!-- Paciente: {{ pacientes[pacientes.length - 1].nome }},
+           Idade: {{ pacientes[pacientes.length - 1].idade }} anos,
+           Plano: {{ pacientes[pacientes.length - 1].plano }} -->
+           {{ ultimoPaciente }}  <!-- Invocando o método que gerou a propriedade computada,
+                                      mas não precisa colocar o abre e fecha parênteses -->
+    </p>
+    <hr>
 
+    <h4>Pacientes do plano Ouro</h4>
+    <!-- <p v-for="p in pacientes">{{ p.plano == 'Ouro' ? p.nome : ''}}</p> -->
+    <p v-for="p in pacientesPlanoOuro">{{ p.nome}}</p>
+    <hr>
+
+    <h4>Pacientes cadastrados</h4>
+    <p v-for="p in pacientes">{{p.nome}}</p>  <!-- double mustache -->
+  </div>
 
   <script>
     const vm = new Vue({ //Instância do vue. Objeto literal Vue
       el: '#app',
-      data: {   //Variáveis reativas
-        comentarios: [   //Array de objetos. Terá um objeto em cada posição deste array.
-          { id: 1, comentario: 'Comentário 11' },  //1º objeto
-          { id: 2, comentario: 'Comentário 12' },  //2º objeto
-          { id: 3, comentario: 'Comentário 13' },  //3º objeto
-        ],
-        numero: 6,
-				cursos: ['Laravel', 'Web Completo', 'Banco de Dados', 'Solid', 'Angular'],  //array
-        cursos2: {  //Objeto literal
-          1000: {  //Objeto literal
-            titulo: 'Laravel',  //atributo1
-            descricao: 'Domine o framework PHP mais poderoso do mundo'   //atributo2
-          },
-          1001: {  //Objeto literal
-            titulo: 'Banco de Dados',   //atributo1
-            descricao: 'Aprenda os principais BDs relacionais do mercado'   //atributo2
-          }
-        },
-        publicacoes: [  //Array de objetos
-          {id: 1, publicacao: 'Publicação 11'},   //cada objeto será uma publicação
-          {id: 2, publicacao: 'Publicação 12'},   //cada objeto será uma publicação
-          {id: 3, publicacao: 'Publicação 13'}    //cada objeto será uma publicação
-        ]
+      data: { //Objeto literal data
+        pacientes: [] //Só criando o array(atributo)
       },
       methods: {
-       misturarArray() {
-         let misturado = [] //Somente criando o array
+        adicionarPaciente() {
+          this.pacientes.push({   //Passando um objeto para este método
+              nome: inputNome.value,  //Atributo nome
+              idade: inputIdade.value,   //Atributo idade
+              plano: inputPlano.value   //Atributo plano
+          })
+        }
+      },
+      //Um método para criar uma "propriedade computada":
+      computed: {
+        ultimoPaciente() {
+          let key = this.pacientes.length - 1
+          let txt = ''
 
-         misturado[0] = this.publicacoes[2]
-         misturado[1] = this.publicacoes[0]
-         misturado[2] = this.publicacoes[1]
+          txt += 'Paciente ' + this.pacientes[key].nome
+          txt += ', idade ' + this.pacientes[key].idade
+          txt += ', plano ' + this.pacientes[key].plano
 
-         this.publicacoes = misturado
-       },
-       adicionarElemento() {
-         //this.comentarios[3] = { id:4, comentario: 'Novo comentário'}
-         //console.log(this.comentarios)
-         this.comentarios.push({ id:4, comentario: 'Novo comentário'})   /* Usando o método nativo do javascript "push()" para */
-       },                                                                /* que seja renderizado o acréscimo do novo elemento(objeto) */
-                                                                         /* no array, tendo assim a "reatividade" com os elementos renderizados */
-                                                                         /* no browser. O vue passa a observar  */
-       removerElemento() {
-         this.comentarios.pop()    /* Usando o método nativo do javascript "pop()" para */
-       },                          /* que seja renderizado a remoção do último elemento(objeto) */                           
-                                   /* no array, tendo assim a "reatividade" com os elementos renderizados */                                
-                                   /* no browser. O vue passa a observar  */   
-       modificarElemento() {
-         //this.$set(<array>,<chave>,<novo valor>)     /* Implementando alterações de valores nos índices do array e ainda assim */
-          this.$set(                                   /* manter essa alteração reativa para com os elementos do DOM */
-            this.comentarios,                          /* $set(): Método nativo do vue.js */
-            1,
-            { id:2, comentario: 'Comentário 2 atualizado'}  //Objeto literal
-          )                                                
-       }                                                                       
-       }     
-     })                               
-    
+          return txt.toLocaleUpperCase()
+        },
+        //Um método para criar outra "propriedade computada":
+        pacientesPlanoOuro() {  //Utilizando uma "arrow function"
+          return this.pacientes.filter(item => item.plano == 'Ouro') //O resultado final deste método nativo do javascript "filter()", será 
+        }                                                            //um novo array contendo apenas os elementos que deram "true" no teste.
+      }
+    })
   </script>
 
 </body>

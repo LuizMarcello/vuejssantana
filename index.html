@@ -2,112 +2,117 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
-  <!-- O vue.js já está no projeto -->
-  <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
-  <script src="./vue.js"></script>
-  <!-- ou -->
-  <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Para incluir o viu.js na nossa aplicação(Opção por download): -->
+    <!-- O vue.js já está no projeto -->
+    <!-- Nossa aplicação "front-end" já está configurada com o framework "vue.js" -->
+    <script src="./vue.js"></script>
+    <!-- ou -->
+    <!-- Para incluir o viu.js na nossa aplicação(Uma das opções por link CDN): -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+    <title>Document</title>
 
-  <style>
+    <style>
 
-  </style>
+    </style>
 </head>
 
 <!-- Os modificadores são atalhos para determinadas ações corriqueiras nos sistemas -->
 
 <body>
-  <!-- Diretiva "v-On": Binding para manipulação de eventos  -->
-  <!-- Síntaxe enxuta: "@" -->
-  <!-- Diretiva v-bind: Realizando o bind em atributos de tags HTML -->
-  <!-- Síntaxe enxuta: ":" -->
-  <!-- Diretiva "v-if": "Renderização" condicional de elementos html. Valor atribuído pode ser uma expressão  -->
-  <!-- Síntaxe enxuta: " " -->
-  <!-- Diretiva "v-show": "Exibição" condicional de elementos html. Valor atribuído pode ser uma expressão
+    <!-- Diretiva "v-On": Binding para manipulação de eventos  -->
+    <!-- Síntaxe enxuta: "@" -->
+    <!-- Diretiva v-bind: Realizando o bind em atributos de tags HTML -->
+    <!-- Síntaxe enxuta: ":" -->
+    <!-- Diretiva "v-if": "Renderização" condicional de elementos html. Valor atribuído pode ser uma expressão  -->
+    <!-- Síntaxe enxuta: " " -->
+    <!-- Diretiva "v-show": "Exibição" condicional de elementos html. Valor atribuído pode ser uma expressão
 													 Será renderizado(fará parte do DOM), mas poderá ou não ser visível. Controla a 
 													 propriedade display do elemento html -->
-  <!-- Síntaxe enxuta: " " -->
-  <!-- Diretiva "v-html": Permite a injeção de elementos html dentro de outros elementos html
+    <!-- Síntaxe enxuta: " " -->
+    <!-- Diretiva "v-html": Permite a injeção de elementos html dentro de outros elementos html
                           É semelhante ao innerHTML do javascript -->
-  <!-- Diretiva "v-text": Permite incluir conteúdo dentro de tags html, em formato de texto.
+    <!-- Diretiva "v-text": Permite incluir conteúdo dentro de tags html, em formato de texto.
                           É semelhante ao innerText do javascript -->
-  <!-- Diretiva "v-once": Faz com que elementos html sejam "renderizados" apenas uma única vêz. -->
-  <!-- Diretiva "v-for":  Implementa laços de repetiçao (loop) -->
-  <!-- Atributo "Key": Fornece uma identidade para um trecho da tag(código) html 
+    <!-- Diretiva "v-once": Faz com que elementos html sejam "renderizados" apenas uma única vêz. -->
+    <!-- Diretiva "v-for":  Implementa laços de repetiçao (loop) -->
+    <!-- Atributo "Key": Fornece uma identidade para um trecho da tag(código) html 
                        Informa ao vue todos os elementos filhos que devem ser modificados, cfe.o binding -->
-  <!-- tag "template" do html5: Muito utilizada para renderizações condicionais e
+    <!-- tag "template" do html5: Muito utilizada para renderizações condicionais e
        para geração de listas. Sua característica particular, ela não é renderizada
        quando a página é carregada no browser(não estará no DOM). Mas ela pode ser
        referenciada e tratada durante a execução do código javascript. -->
-  <!-- Propriedade computed(computada)(métodos): É definida no objeto literal e encaminhada como parâmetro 
+    <!-- Propriedade computed(computada)(métodos): É definida no objeto literal e encaminhada como parâmetro 
                                                  na instância do vue. São métodos que retornam valores formados 
                                                  dinamicamente. Ajuda a evitar lógicas complexas nos "double
                                                  mustaches" do template -->
-  <div id="app">  <!-- Nosso template -->                            
-    <h4>Adicionar pacientes</h4>
-    <span>Nome: </span><input type="text" id="inputNome"><br>
-    <span>Idade: </span><input type="text" id="inputIdade"><br>
-    <span>Plano: </span><input type="text" id="inputPlano"><br>
-    <button @click="adicionarPaciente()">Adicionar</button>
-    <hr>
-    <h4>Último paciente cadastrado</h4>
-    <p v-if="pacientes.length > 0">  <!-- Só vai executar se o array não estiver vazio -->
-      <!-- Paciente: {{ pacientes[pacientes.length - 1].nome }},
+    <div id="app">
+        <!-- Nosso template -->
+        <h4>Adicionar pacientes</h4>
+        <span>Nome: </span><input type="text" id="inputNome"><br>
+        <span>Idade: </span><input type="text" id="inputIdade"><br>
+        <span>Plano: </span><input type="text" id="inputPlano"><br>
+        <button @click="adicionarPaciente()">Adicionar</button>
+        <hr>
+        <h4>Último paciente cadastrado</h4>
+        <p v-if="pacientes.length > 0">
+            <!-- Só vai executar se o array não estiver vazio -->
+            <!-- Paciente: {{ pacientes[pacientes.length - 1].nome }},
            Idade: {{ pacientes[pacientes.length - 1].idade }} anos,
            Plano: {{ pacientes[pacientes.length - 1].plano }} -->
-           {{ ultimoPaciente }}  <!-- Invocando o método que gerou a propriedade computada,
+            {{ ultimoPaciente }}
+            <!-- Invocando o método que gerou a propriedade computada,
                                       mas não precisa colocar o abre e fecha parênteses -->
-    </p>
-    <hr>
+        </p>
+        <hr>
 
-    <h4>Pacientes do plano Ouro</h4>
-    <!-- <p v-for="p in pacientes">{{ p.plano == 'Ouro' ? p.nome : ''}}</p> -->
-    <p v-for="p in pacientesPlanoOuro">{{ p.nome}}</p>
-    <hr>
+        <h4>Pacientes do plano Ouro</h4>
+        <!-- <p v-for="p in pacientes">{{ p.plano == 'Ouro' ? p.nome : ''}}</p> -->
+        <p v-for="p in pacientesPlanoOuro">{{ p.nome}}</p>
+        <hr>
 
-    <h4>Pacientes cadastrados</h4>
-    <p v-for="p in pacientes">{{p.nome}}</p>  <!-- double mustache -->
-  </div>
+        <h4>Pacientes cadastrados</h4>
+        <p v-for="p in pacientes">{{p.nome}}</p>
+        <!-- double mustache -->
+    </div>
 
-  <script>
-    const vm = new Vue({ //Instância do vue. Objeto literal Vue
-      el: '#app',
-      data: { //Objeto literal data
-        pacientes: [] //Só criando o array(atributo)
-      },
-      methods: {
-        adicionarPaciente() {
-          this.pacientes.push({   //Passando um objeto para este método
-              nome: inputNome.value,  //Atributo nome
-              idade: inputIdade.value,   //Atributo idade
-              plano: inputPlano.value   //Atributo plano
-          })
-        }
-      },
-      //Um método para criar uma "propriedade computada":
-      computed: {
-        ultimoPaciente() {
-          let key = this.pacientes.length - 1
-          let txt = ''
+    <script>
+        const vm = new Vue({ //Instância do vue. Objeto literal Vue
+            el: '#app',
+            data: { //Objeto literal data
+                pacientes: [] //Só criando o array(atributo)
+            },
+            methods: {
+                adicionarPaciente() {
+                    this.pacientes.push({ //Passando um objeto para este método
+                        nome: inputNome.value, //Atributo nome
+                        idade: inputIdade.value, //Atributo idade
+                        plano: inputPlano.value //Atributo plano
+                    })
+                }
+            },
+            //Um método para criar uma "propriedade computada":
+            computed: {
+                ultimoPaciente() {
+                    let key = this.pacientes.length - 1
+                    let txt = ''
 
-          txt += 'Paciente ' + this.pacientes[key].nome
-          txt += ', idade ' + this.pacientes[key].idade
-          txt += ', plano ' + this.pacientes[key].plano
+                    txt += 'Paciente ' + this.pacientes[key].nome
+                    txt += ', idade ' + this.pacientes[key].idade + ' anos'
+                    txt += ', plano ' + this.pacientes[key].plano
 
-          return txt.toLocaleUpperCase()
-        },
-        //Um método para criar outra "propriedade computada":
-        pacientesPlanoOuro() {  //Utilizando uma "arrow function"
-          return this.pacientes.filter(item => item.plano == 'Ouro') //O resultado final deste método nativo do javascript "filter()", será 
-        }                                                            //um novo array contendo apenas os elementos que deram "true" no teste.
-      }
-    })
-  </script>
+                    /*  return txt.toLocaleUpperCase() */
+                    return txt
+                },
+                //Um método para criar outra "propriedade computada":
+                pacientesPlanoOuro() { //Utilizando uma "arrow function"
+                    return this.pacientes.filter(item => item.plano == 'Ouro') //O resultado final deste método nativo do javascript "filter()", será 
+                } //um novo array contendo apenas os elementos que deram "true" no teste.
+            }
+        })
+    </script>
 
 </body>
 

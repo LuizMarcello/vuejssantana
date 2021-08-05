@@ -50,43 +50,69 @@
                                                  mustaches" do template -->
   <!-- Diretiva v-model: Permite realizar a atualização de mão dupla(two-way-data binding) entre os atributos
        da instância do vue.js e os campos de formulários dos templates(do modelo)(inputs) -->
-  <!-- Diretiva(propriedade) watch: Assistir por mudanças nos atributos da instância do vue. Numa mudança de estado em
-       atributos que estão sendo observados, uma ação(método) é automaticamente disparado. Reaje a alterações de dados. -->
 
   <div id="app">
-    <span>Paciente: </span><input type="text" v-model="paciente">
+    <!-- Nosso template -->
+    <!-- É assim: Usando a diretiva "v-bind(:)" para recuperar para o atributo "value" da tag "input" do template "#app",
+         o valor contido no atributo "paciente" do objeto literal "data" da instância do "vue". Somente "one-way-data-binding",
+         ou seja, da instãncia do vue para o template -->
+    {{paciente}} <br>
+    <!-- <input type="text" :value="paciente"> Assim: "one-way-data-binding" -->
+    <!-- ou -->
+    <!-- <input type="text" :value="paciente" @keyup="setPaciente($event)"> Assim: "two-way-data binding" com duas diretivas(v-bind/v-on) -->
+    <!-- ou -->
+    <!-- <input type="text" :value="paciente" @keyup="paciente = $event.target.value"> Assim: "two-way-data binding" com duas diretivas -->
+    <!-- ou finalmente "two-way-data binding(mão dupla)" usando a diretiva "v-model". -->
+    <!-- Diretiva v-model com o input(entrada de dados) "<input>" type "text", para haver um sincronismo("two-way-data binding(mão dupla)) -->
+    <input type="text" v-model="paciente">
+    <hr>
+    <!-- Diretiva v-model com o input(entrada de dados) "<input>" type "radio", para haver um sincronismo("two-way-data binding(mão dupla)) -->
+    <input type="radio" value="f" v-model="sexo">Feminino
+    <input type="radio" value="m" v-model="sexo">masculino
     <br>
-    <ul>
-      <li v-for="p in lista">{{p.nome}}, {{p.idade}}</li>
-    </ul>
+    {{sexo}}
+    <hr>
+    <!-- Diretiva v-model com o input(entrada de dados) "<select>", para haver um sincronismo("two-way-data binding(mão dupla)) -->
+    <select v-model="plano">
+      <option value="" disabled>Selecione um plano</option>
+      <option value="1">Básico 1</option>
+      <option value="2">Básico 2</option>
+      <option value="3">Master</option>
+    </select>
+    <br>
+    {{plano}}
+    <hr>
+    <!-- Diretiva v-model com o input(entrada de dados) "<input>" type "checkbox", para haver um sincronismo("two-way-data binding(mão dupla)) -->
+    <input type="checkbox" value="Doença respiratória" v-model="doencas">Asma 
+    <input type="checkbox" value="Doenca controlável" v-model="doencas">Diabetes 
+    <input type="checkbox" value="Doença nasal-respiratória" v-model="doencas">Renite
+    <br>
+    {{doencas}}
+    <hr>
+    <!-- Diretiva v-model com o input(entrada de dados) "textarea", para haver um sincronismo("two-way-data binding(mão dupla)) -->
+    <textarea v-model="diagnostico" name="" id="" cols="20" rows="5"></textarea>  <!-- textarea tem tag de fechamento -->
+    <br>
+    {{diagnostico}}
+
   </div>
 
   <script>
     const vm = new Vue({ //Instância do vue. Objeto literal Vue
       el: '#app',
-      data: { //Objeto literal
-        paciente: '', //Atributo
-        pacientes: [  //Atributo
-          {nome: 'Jorge Sant Ana', idade: 32 },
-          {nome: 'João Santos', idade: 45 },
-          {nome: 'José Augusto', idade: 18 },
-          {nome: 'Junior Silva', idade: 20 },
-          {nome: 'Julio', idade: 50 }
-        ],
-        lista: []
+      data: { //Objeto literal data
+        paciente: 'João da Silva',
+        sexo: '',
+        plano: '',
+        doencas: [],  //Array, pois checkbox permite várias opções simultâneas.
+        diagnostico: ''
       },
-      methods: {}, //Objeto literal
-      computed: {}, //Objeto literal para criar "propriedades computadas"
-      watch: { //Objeto literal
-        /* paciente(valorNovo, valorAntigo) { */       
-        paciente(valorNovo) {                          //Este método "observador" tem que ter o "mesmo nome" do atributo a ser observado,
-            /* console.log(valorNovo, valorAntigo) */  //no caso, atributo "paciente". Irá monitorar a mudança de estados do mesmo,
-            console.log(valorNovo)                     //no caso, atributo "paciente". Irá monitorar a mudança de estados do mesmo,
-                                                      //e disparar ações.
-            /* console.log(this.pacientes.filter(p => p.nome.match(valorNovo))) */   //Uma "arrow-function". match() retornará "true" quando um dos
-            this.lista = this.pacientes.filter(p => p.nome.match(valorNovo))       //nomes do array for compatível com valorNovo
-        }                                                                            
-      }
+      methods: {
+        /* setPaciente(e) {
+          this.paciente = e.target.value */
+      },
+      //Métodos para criar uma "propriedade computada":
+      computed: {}
+
     })
   </script>
 
